@@ -68,7 +68,7 @@ h1 {
     flex: 2;
 }
 
-.divide, .multiply, .minus, .plus {
+.divide, .multiply, .minus, .add {
     background-color: rgb(211, 187, 143);
 }
 
