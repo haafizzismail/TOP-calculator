@@ -2,6 +2,28 @@ const display = document.querySelector('.display');
 display.textContent = '0';
 
 let numberStore = '';
+let currentOperator = 'add';
+let operandA = 0;
+const operators = document.querySelectorAll('.operator');
+operators.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        if (numberStore != '') {
+            operandA = operate(currentOperator, operandA, numberStore);
+            display.textContent = operandA;
+        }
+        currentOperator = e.target.id;
+        numberStore = '';
+    });
+})
+
+const equals = document.querySelector('#equals');
+equals.addEventListener('click', (e) => {
+    operandA = operate(currentOperator, operandA, numberStore);
+    display.textContent = operandA;
+    numberStore = '';
+    operandA = 0;
+});
+
 const numberClicks = document.querySelectorAll('.number');
 numberClicks.forEach(numberClick => {
     numberClick.addEventListener('click', (e) => {
@@ -16,51 +38,43 @@ numberClicks.forEach(numberClick => {
 const clear = document.querySelector('.button.clear');
 clear.addEventListener('click', clearDisplay);
 
-let currentOperator = '';
-let operandA = '';
-const operators = document.querySelectorAll('.operator');
-operators.forEach(operator => {
-    operator.addEventListener('click', (e) => {
-        currentOperator = e.target.id;
-        add();
-        // operandA = Number(operandA) + Number(display.textContent);
-        // display.textContent = operandA;
-        // numberStore = '';
-    });
-})
-
-function add() {
-    operandA = Number(operandA) + Number(display.textContent);
-    display.textContent = operandA;
-    numberStore = '';
-    // return a + b;
+function add(operandA, numberStore) {
+    operandA = Number(operandA) + Number(numberStore);
+    return operandA;
 }
 
-function subtract(a, b) {
-    return a - b;
+function subtract(operandA, numberStore) {
+    console.log(operandA);
+    console.log(numberStore);
+    operandA = Number(operandA) - Number(numberStore);
+    return operandA;
 }
 
-function multiply(a, b) {
-    return a * b;
+function multiply(operandA, numberStore) {
+    operandA = Number(operandA) * Number(numberStore);
+    return operandA;
 }
 
-function divide(a, b) {
-    return a / b;
+function divide(operandA, numberStore) {
+    operandA = Number(operandA) / Number(numberStore);
+    return operandA;
 }
 
-function operate(operator, a, b) {
+function operate(operator, operandA, numberStore) {
     if (operator === 'add') {
-        return add(a, b);
+        return add(operandA, numberStore);
     } else if (operator === 'subtract') {
-        return subtract(a, b);
+        return subtract(operandA, numberStore);
     } else if (operator === 'multiply') {
-        return multiply(a, b);
+        return multiply(operandA, numberStore);
     } else if (operator === 'divide') {
-        return divide(a, b);
+        return divide(operandA, numberStore);
     }
 }
 
 function clearDisplay() {
     numberStore = '';
     display.textContent = '0';
+    operandA = 0;
+    currentOperator = 'add';
 }
