@@ -2,7 +2,6 @@ const display = document.querySelector('.display');
 display.textContent = '0';
 
 let numberStore = '';
-
 const numberClicks = document.querySelectorAll('.number');
 numberClicks.forEach(numberClick => {
     numberClick.addEventListener('click', (e) => {
@@ -17,8 +16,24 @@ numberClicks.forEach(numberClick => {
 const clear = document.querySelector('.button.clear');
 clear.addEventListener('click', clearDisplay);
 
-function add(a, b) {
-    return a + b;
+let currentOperator = '';
+let operandA = '';
+const operators = document.querySelectorAll('.operator');
+operators.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        currentOperator = e.target.id;
+        add();
+        // operandA = Number(operandA) + Number(display.textContent);
+        // display.textContent = operandA;
+        // numberStore = '';
+    });
+})
+
+function add() {
+    operandA = Number(operandA) + Number(display.textContent);
+    display.textContent = operandA;
+    numberStore = '';
+    // return a + b;
 }
 
 function subtract(a, b) {
