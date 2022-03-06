@@ -1,16 +1,22 @@
 const display = document.querySelector('.display');
 display.textContent = '0';
 
+let result = 0;
 let numberStore = '';
 let currentOperator = 'add';
 let operandA = 0;
 const operators = document.querySelectorAll('.operator');
 operators.forEach(operator => {
     operator.addEventListener('click', (e) => {
+        if (result !== 0) {
+            numberStore = result;
+        }
+
         if (numberStore != '') {
             operandA = operate(currentOperator, operandA, numberStore);
             display.textContent = operandA;
         }
+
         currentOperator = e.target.id;
         numberStore = '';
     });
@@ -18,8 +24,15 @@ operators.forEach(operator => {
 
 const equals = document.querySelector('#equals');
 equals.addEventListener('click', (e) => {
-    operandA = operate(currentOperator, operandA, numberStore);
-    display.textContent = operandA;
+
+    if (numberStore != '') {
+        operandA = operate(currentOperator, operandA, numberStore);
+        result = operandA;
+        display.textContent = result;
+    }
+
+    display.textContent = result;
+    currentOperator = 'add'
     numberStore = '';
     operandA = 0;
 });
@@ -27,6 +40,7 @@ equals.addEventListener('click', (e) => {
 const numberClicks = document.querySelectorAll('.number');
 numberClicks.forEach(numberClick => {
     numberClick.addEventListener('click', (e) => {
+        result = 0;
         if (numberStore.charAt(0) === '0') {
             numberStore = numberStore.substring(1);
         }
@@ -77,4 +91,5 @@ function clearDisplay() {
     display.textContent = '0';
     operandA = 0;
     currentOperator = 'add';
+    result = 0;
 }
