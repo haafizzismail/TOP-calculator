@@ -14,11 +14,17 @@ operators.forEach(operator => {
 
         if (numberStore != '') {
             operandA = operate(currentOperator, operandA, numberStore);
+            if (operandA.length > 3) {
+                operandA.substring(3);
+            }
             display.textContent = operandA;
         }
 
+
         currentOperator = e.target.id;
         numberStore = '';
+
+
     });
 })
 
@@ -41,6 +47,8 @@ const numberClicks = document.querySelectorAll('.number');
 numberClicks.forEach(numberClick => {
     numberClick.addEventListener('click', (e) => {
         result = 0;
+        if (e.target.textContent === '.' && numberStore.includes('.')) return;
+
         if (numberStore.charAt(0) === '0') {
             numberStore = numberStore.substring(1);
         }
@@ -58,8 +66,6 @@ function add(operandA, numberStore) {
 }
 
 function subtract(operandA, numberStore) {
-    console.log(operandA);
-    console.log(numberStore);
     operandA = Number(operandA) - Number(numberStore);
     return operandA;
 }
