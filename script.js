@@ -19,12 +19,8 @@ operators.forEach(operator => {
             }
             display.textContent = operandA;
         }
-
-
         currentOperator = e.target.id;
         numberStore = '';
-
-
     });
 })
 
@@ -45,7 +41,6 @@ equals.addEventListener('click', (e) => {
 
 const numberClicks = document.querySelectorAll('.number');
 numberClicks.forEach(numberClick => {
-
     numberClick.addEventListener('click', (e) => {
         result = 0;
         if (e.target.textContent === '.' && numberStore.includes('.')) return;
@@ -57,6 +52,13 @@ numberClicks.forEach(numberClick => {
         display.textContent = numberStore;
     });
 })
+
+document.addEventListener('keypress', (e) => {
+    if (e.key >= 0 && e.key <= 9) {
+        numberStore += e.key;
+        display.textContent = numberStore;
+    }
+});
 
 const clear = document.querySelector('.button.clear');
 clear.addEventListener('click', clearDisplay);
@@ -111,4 +113,3 @@ function clearDisplay() {
     currentOperator = 'add';
     result = 0;
 }
-//add keyboard support
