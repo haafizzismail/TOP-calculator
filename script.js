@@ -45,6 +45,7 @@ equals.addEventListener('click', (e) => {
 
 const numberClicks = document.querySelectorAll('.number');
 numberClicks.forEach(numberClick => {
+
     numberClick.addEventListener('click', (e) => {
         result = 0;
         if (e.target.textContent === '.' && numberStore.includes('.')) return;
@@ -60,24 +61,35 @@ numberClicks.forEach(numberClick => {
 const clear = document.querySelector('.button.clear');
 clear.addEventListener('click', clearDisplay);
 
+const backspace = document.querySelector('.backspace');
+backspace.addEventListener('click', () => {
+
+    numberStore = numberStore.substring(0, numberStore.length - 1)
+    display.textContent = numberStore || 0;
+});
+
 function add(operandA, numberStore) {
-    operandA = Number(operandA) + Number(numberStore);
+    operandA = Math.round((Number(operandA) + Number(numberStore)) * 10000000000000) / 10000000000000;
     return operandA;
 }
 
 function subtract(operandA, numberStore) {
-    operandA = Number(operandA) - Number(numberStore);
+    operandA = Math.round((Number(operandA) - Number(numberStore)) * 10000000000000) / 10000000000000;
     return operandA;
 }
 
 function multiply(operandA, numberStore) {
-    operandA = Number(operandA) * Number(numberStore);
+    operandA = Math.round((Number(operandA) * Number(numberStore)) * 10000000000000) / 10000000000000;
     return operandA;
 }
 
 function divide(operandA, numberStore) {
-    operandA = Number(operandA) / Number(numberStore);
-    return operandA;
+    if (numberStore == 0) {
+        return "hey wtf";
+    } else {
+        operandA = Math.round((Number(operandA) / Number(numberStore)) * 10000000000000) / 10000000000000;
+        return operandA;
+    }
 }
 
 function operate(operator, operandA, numberStore) {
@@ -99,3 +111,4 @@ function clearDisplay() {
     currentOperator = 'add';
     result = 0;
 }
+//add keyboard support

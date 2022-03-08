@@ -73,6 +73,14 @@ h1 {
     background-color: rgba(216, 2, 2, 0.5);
 }
 
+.backspace {
+    background-color: rgba(207, 57, 57, 0.5);
+}
+
+.backspace:hover {
+    background-color: rgba(207, 57, 57, 0.8);
+}
+
 .clear:hover {
     background-color: rgba(216, 2, 2, 0.8);
 }
